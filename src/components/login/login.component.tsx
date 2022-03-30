@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, {useState} from 'react'
+
 import { FunctionComponent } from "react";
 import "../../styles/login/login.styles.css";
 import logo from "../../img/logo1.png";
@@ -7,8 +8,16 @@ import logo from "../../img/logo1.png";
 interface LoginProps {}
 
 
-
+interface IUser {
+ 
+  userName: string;
+  password : string
+}
 const Login: FunctionComponent<LoginProps> = () => {
+
+  const [userName, setUserName] = useState<IUser>()
+
+
  
   return (
     <div className="d-flex login-main ">
