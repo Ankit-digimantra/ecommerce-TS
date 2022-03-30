@@ -10,12 +10,27 @@ interface LoginProps {}
 
 interface IUser {
  
-  userName: string;
+  userName: string,
   password : string
+}
+
+interface SyntheticEvent<T> {
+  
+  currentTarget: EventTarget & T;
+  
 }
 const Login: FunctionComponent<LoginProps> = () => {
 
-  const [userName, setUserName] = useState<IUser>()
+  const [loginData, setLoginData] = useState<IUser>({
+    userName :'',
+    password :''
+  })
+
+
+  const onChangeHandler=(e: React.ChangeEvent<HTMLInputElement>): void =>{
+    setLoginData({...loginData,[e.target.name]:e.target.value})
+    // console.log(e.target.value)
+  }
 
 
  
@@ -34,11 +49,15 @@ const Login: FunctionComponent<LoginProps> = () => {
           <div className="form-group mt-3">
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input
+              name='userName'
               type="email"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter email"
+              value={loginData.userName}
+              onChange={onChangeHandler}
+
             />
             {/* <small id="emailHelp" className="form-text text-muted">
               We'll never share your email with anyone else.
@@ -47,10 +66,13 @@ const Login: FunctionComponent<LoginProps> = () => {
           <div className="form-group mt-3">
             <label htmlFor="exampleInputPassword1">Password</label>
             <input
+              name='password'
               type="password"
               className="form-control"
               id="exampleInputPassword1"
               placeholder="Password"
+              value={loginData.password}
+              onChange={onChangeHandler}
             />
           </div>
           {/* <div className="form-check">
